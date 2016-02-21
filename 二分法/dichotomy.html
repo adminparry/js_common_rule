@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>dichotomy</title>
+</head>
+<body>
+	
+</body>
+<script>
+	//例子：有序数组查找
+
+//1递归做法
+
+function findArr(arr,value,left,right){
+
+var mid=Math.floor((left+right)/2);
+
+//防止无穷递归
+
+if(left>right){
+
+return
+
+}
+
+if(arr[mid]>value){//左边
+
+return findArr(arr,value,left,mid-1)
+
+}else if(arr[mid]<value){//右边
+
+return findArr(arr,value,mid+1,right)
+
+}else{
+
+return '找到了，位置是'+mid;
+
+}
+
+};
+
+//2 二进制做法
+
+function binary(items,value,startIndex,stopIndex){
+
+var middleIndex=(startIndex+stopIndex)>>>1;
+
+while(items[middleIndex]!=value && startIndex<stopIndex){
+
+if(items[middleIndex]>value){
+
+stopIndex=middleIndex-1;
+
+}else{
+
+startIndex=middleIndex+1;
+
+}
+
+middleIndex=(startIndex+stopIndex)>>>1;
+
+}
+
+return items[middleIndex]!=value ? false:middleIndex;
+
+}
+
+var arr=[11,22,33,44,55,66,77,88,99];
+
+alert(findArr(arr,66,0,arr.length-1));
+
+alert(binary(arr,660,arr.length-1));
+</script>
+</html>
